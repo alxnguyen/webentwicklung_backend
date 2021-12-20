@@ -9,17 +9,17 @@ app.use(cors());
 app.use(express.urlencoded({extended: false}));
 
 app.get("/", (req, res) => {
-    Users.findUserByEmail("user1@email.com")
+    Users.findAllUsers()
       .then((user) => {
-        res.status(200).json(user);
+        res.status(200).json(users);
       })
       .catch((error) => {
         res.status(500).json({ message: "unable to retrieve users" });
       });
   });
 
-app.post("/", (req, res) => {
-    const user = Users.findUserByEmail(req.body.email);
+app.post("/", async (req, res) => {
+    const user = await Users.findUserByEmail(req.body.email);
     console.log(user);
     if(!user) {
         return res.status(400).send("Cannot find user");

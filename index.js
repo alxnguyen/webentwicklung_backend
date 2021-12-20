@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.urlencoded({extended: false}));
 
 app.get("/", (req, res) => {
-    Lessons.findAllUsers()
+    Users.findAllUsers()
       .then((users) => {
         res.status(200).json(users);
       })

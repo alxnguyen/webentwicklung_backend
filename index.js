@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended: false}));
 
 app.get("/", (req, res) => {
     Users.findAllUsers()
-      .then((user) => {
+      .then((users) => {
         res.status(200).json(users);
       })
       .catch((error) => {

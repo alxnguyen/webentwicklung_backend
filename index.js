@@ -8,7 +8,7 @@ app.use(cors())
 app.use(express.urlencoded({extended: false}));
 
 app.post("/", (req, res) => {
-    const user = Users.findUserByEmail(req.body.email);
+    const user = Users.findUserByEmail(req.body);
     console.log(user);
     if(!user) {
         return res.status(400).send("Cannot find user");

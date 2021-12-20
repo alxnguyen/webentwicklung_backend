@@ -9,7 +9,7 @@ app.use(express.urlencoded({extended: false}));
 
 app.post("/", (req, res) => {
     const user = Users.findUserByEmail(req.body.email);
-    console.log(user);
+    console.log(req.body);
     if(!user) {
         return res.status(400).send("Cannot find user");
     } else {

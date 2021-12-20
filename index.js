@@ -3,8 +3,8 @@ var cors=require('cors');
 const Users = require("./models/dbHelpers");
 
 var app=express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 app.use(express.urlencoded({extended: false}));
 

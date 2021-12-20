@@ -5,11 +5,8 @@ const Users = require("./models/dbHelpers");
 var app=express();
 app.use(cors())
 
-app.get('/', function (req, res)    {
-    res.send('Hallo Welt!');
-});
-
-router.get("/index/:email", (req, res) => {
+app.get("/", (req, res) => {
+    console.log(req.params);
     const {email} = req.params;
     Users.findUserByEmail(email)
     .then((user) => {

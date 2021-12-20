@@ -18,9 +18,8 @@ app.get("/", (req, res) => {
       });
   });
 
-app.post("/", async (req, res) => {
-    const user = await Users.findUserByEmail(req.body.email);
-    console.log(user);
+app.post("/", (req, res) => {
+    const user = Users.findUserByEmail(req.body.email);
     if(!user) {
         return res.status(400).send("Cannot find user");
     } else {

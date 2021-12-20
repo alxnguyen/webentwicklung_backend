@@ -3,9 +3,20 @@ var cors=require('cors');
 const Users = require("./models/dbHelpers");
 
 var app=express();
-app.use(cors())
+app.use(json());
+app.use(cors());
 
 app.use(express.urlencoded({extended: false}));
+
+app.get("/", (req, res) => {
+    Lessons.findAllUsers()
+      .then((users) => {
+        res.status(200).json(users);
+      })
+      .catch((error) => {
+        res.status(500).json({ message: "unable to retrieve users" });
+      });
+  });
 
 app.post("/", (req, res) => {
     const user = Users.findUserByEmail(req.body.email);

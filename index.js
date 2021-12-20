@@ -9,9 +9,9 @@ app.use(cors());
 app.use(express.urlencoded({extended: false}));
 
 app.get("/", (req, res) => {
-    Users.findAllUsers()
-      .then((users) => {
-        res.status(200).json(users);
+    Users.findUserByEmail("user1@email.com")
+      .then((user) => {
+        res.status(200).json(user);
       })
       .catch((error) => {
         res.status(500).json({ message: "unable to retrieve users" });

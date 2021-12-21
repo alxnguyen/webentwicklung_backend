@@ -22,12 +22,15 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
     console.log(req.body.email);
-    const user = Users.findUserByEmail(req.body.email).then((user) => {console.log(user)});
-    if(!user) {
-        return res.status(400).send("Cannot find user");
-    } else {
-        return res.status(201).send("User found");
-    }
+    const user = Users.findUserByEmail(req.body.email).then((user) => {console.log(user)})
+    .then((user) => {
+        if(!user) {
+            return res.status(400).send("Cannot find user");
+        } else {
+            return res.status(201).send("User found");
+        }
+    });
+    
 });
 
 app.listen(process.env.PORT ||3000);

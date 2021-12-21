@@ -9,6 +9,16 @@ app.use(express.json());
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 
+router.get("/", (req, res) => {
+    Users.findUserByEmail("user1@email.com")
+      .then((user) => {
+        res.status(200).json(user);
+      })
+      .catch((error) => {
+        res.status(500).json({ message: "unable to retrieve users" });
+      });
+  });
+
 app.post("/", (req, res) => {
     console.log(req.body.email);
     const user = Users.findUserByEmail(req.body.email);

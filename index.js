@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 
-router.get("/", (req, res) => {
+app.get("/", (req, res) => {
     Users.findUserByEmail("user1@email.com")
       .then((user) => {
         res.status(200).json(user);

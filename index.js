@@ -1,9 +1,13 @@
 var express=require('express');
 var cors=require('cors');
 const Users = require("./models/dbHelpers");
+const bp = require('body-parser');
 
 var app=express();
-app.use(cors())
+app.use(cors());
+app.use(express.json());
+app.use(bp.json())
+app.use(bp.urlencoded({ extended: true }))
 
 app.post("/", (req, res) => {
     const user = Users.findUserByEmail(req.body);

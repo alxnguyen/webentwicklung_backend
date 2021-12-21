@@ -10,7 +10,7 @@ app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 
 app.post("/", (req, res) => {
-    console.log(req.body);
+    console.log(req.body.email);
     const user = Users.findUserByEmail(req.body.email);
     console.log(user);
     if(!user) {

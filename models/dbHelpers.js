@@ -6,9 +6,5 @@ module.exports = {
 }
 
 function findUserByEmail(email) {
-    return db("users").where({email: email}).first();
-}
-
-function findAllUsers() {
-    return db("users");
+    return db("users").where({email}).first();
 }

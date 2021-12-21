@@ -13,6 +13,7 @@ app.get("/", (req, res) => {
     Users.findUserByEmail("user1@email.com")
       .then((user) => {
         res.status(200).json(user);
+        console.log(user);
       })
       .catch((error) => {
         res.status(500).json({ message: "unable to retrieve users" });

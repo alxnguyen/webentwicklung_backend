@@ -22,8 +22,7 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
     console.log(req.body.email);
-    const user = Users.findUserByEmail(req.body.email);
-    console.log(user);
+    const user = Users.findUserByEmail(req.body.email).then((user) => {console.log(user)});
     if(!user) {
         return res.status(400).send("Cannot find user");
     } else {

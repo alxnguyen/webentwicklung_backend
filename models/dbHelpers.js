@@ -1,8 +1,7 @@
 const db = require("../knexSetup");
 
 module.exports = {
-    findUserByEmail,
-    findAllUsers
+    findUserByEmail
 }
 
 function findUserByEmail(email) {

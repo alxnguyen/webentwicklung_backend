@@ -54,4 +54,5 @@ client.on("connect", () => console.log("Successfully connected to redis"));
   
       }
     });
+    console.log("alles vorbei")
   }

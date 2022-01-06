@@ -1,4 +1,4 @@
-const Users = require("./models/dbHelpers");
+const Users = require("../models/dbHelpers");
 
 class AuthService   {
     async checkPassword(email, password)   {

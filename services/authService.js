@@ -1,4 +1,5 @@
 const Users = require("../models/dbHelpers");
+const crypto=require("crypto")
 
 module.exports = {
     checkPassword,

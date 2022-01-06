@@ -3,7 +3,6 @@ var cors=require('cors');
 const authService=require("./services/authService")
 const bp = require('body-parser');
 var app=express();
-const crypto=require("crypto")
 app.use(cors());
 app.use(express.json());
 app.use(bp.json())

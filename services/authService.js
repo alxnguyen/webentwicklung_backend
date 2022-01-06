@@ -16,7 +16,7 @@ class authService   {
         });
     }
 
-    async login(email, password)    {
+    async function login(email, password)    {
         const correctPassword=await this.checkPassword(email, password);
         if(correctPassword) {
             const sessionId=crypto.randomUUID();

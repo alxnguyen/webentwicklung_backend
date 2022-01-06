@@ -19,7 +19,6 @@ app.post("/", async (req, res) => {
   sessionId=await authService.login(email, password);
   var cookie=req.cookies.session;
   if(!sessionId)  {
-    console.log("ich bins");
     return res.status(400).send("User Authentification failed");
   }
   if(cookie==undefined) {

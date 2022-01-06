@@ -29,7 +29,7 @@ app.post("/", async (req, res) => {
   }
 
   async function login(email, password)    {
-    correctPassword=await checkPassword(email, password);
+    correctPassword=await checkPassword(email, password).then;
     if(correctPassword) {
       console.log("erstelle sessionId");
       const sessionId=crypto.randomUUID();
@@ -42,7 +42,8 @@ app.post("/", async (req, res) => {
 
   const email = req.body.email;
   const password = req.body.password;
-  sessionId=await login(email, password)
+  sessionId=await login(email, password);
+  console.log("loginfunktion durch");
   if(!sessionId)  {
     return res.status(400).send("User Authentification failed");
   } else  {

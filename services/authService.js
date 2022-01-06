@@ -1,5 +1,6 @@
 const Users = require("../models/dbHelpers");
 const crypto=require("crypto");
+
 class AuthService   {
     async checkPassword(email, password)   {
         const user= Users.findUserByEmail(email).then((user) => {
@@ -24,3 +25,4 @@ class AuthService   {
         return undefined
     }
 }
+export default AuthService

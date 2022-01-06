@@ -7,6 +7,7 @@ var password2;
 var password3;
 
 bcrypt.hash("password1", saltRounds, function(err, hash) {
+  console.log(hash);
   password1 = hash;
 });
 

@@ -4,6 +4,7 @@ module.exports = {
     findUserByEmail
 }
 
-function findUserByEmail(email) {
-    return db("users").where({email}).first();
+async function findUserByEmail(email) {
+    user=await db("users").where({email}).first();
+    return user;
 }

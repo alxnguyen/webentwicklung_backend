@@ -25,4 +25,5 @@ class AuthService   {
         return undefined
     }
 }
-export default AuthService
+
+export default AuthService;

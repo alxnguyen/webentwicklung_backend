@@ -28,9 +28,10 @@ async function checkPassword(email, password)   {
     } else  {
       bcrypt.compare(password, user.password, function(err, res) {
         if(res) {
+          console.log("funktioniert eig. alles")
           return true;
         } else {
-          console.log("falsches Passwort: "+password+ "   " + bcrypt.hash(password, 10)+ "    " + user.password);
+          console.log("falsches Passwort: "+password+ "   " + await bcrypt.hash(password, 10)+ "    " + user.password);
           return false;
         }
       });
@@ -40,6 +41,7 @@ async function checkPassword(email, password)   {
   async function login(email, password)    {
     correctPassword=await checkPassword(email, password);
     if(correctPassword) {
+      console.log("hallohallohallo");
       const sessionId=crypto.randomUUID();
       await client.set(sessionId, email, { EX: 60 });
       return sessionId;

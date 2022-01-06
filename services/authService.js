@@ -42,7 +42,7 @@ client.on("connect", () => console.log("Successfully connected to redis"));
 
 
   async function login(email, password)    {
-    correctPassword=await checkPassword(email, password).then( (correctPassword) => {
+    correctPassword=await checkPassword(email, password).then(  async function(correctPassword) {
       console.log("hallohallo:  "+ correctPassword)
       if(correctPassword) {
         console.log("hallohallohallo");

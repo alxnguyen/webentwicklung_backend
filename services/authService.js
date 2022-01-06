@@ -21,6 +21,7 @@ client.on("connect", () => console.log("Successfully connected to redis"));
 
 
   async function checkPassword(email, password)   {
+    console.log("checkpassword startet"); 
     const user= await Users.findUserByEmail(email)
     if(!user)   {
         console.log("User existiert nicht");

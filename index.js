@@ -2,6 +2,7 @@ var express=require('express');
 var cors=require('cors');
 const Users = require("./models/dbHelpers");
 const bp = require('body-parser');
+const bcrypt = require("bcrypt");
 
 var app=express();
 app.use(cors());
@@ -19,11 +20,13 @@ app.post("/", (req, res) => {
         if(!user) {
             return res.status(400).send("Cannot find user");
         } else {
-            if(password === user.password) {
-              return res.status(201).send("User found");
-            } else {
-              return res.status(401).send("Wrong password");
-            }
+            bcrypt.compare(password, user.password, function(err, res) {
+              if(res) {
+                return res.status(201).send("User found");
+              } else {
+                return res.status(401).send("Wrong password");
+              }
+            });
         }
     }); 
 });

@@ -42,15 +42,16 @@ client.on("connect", () => console.log("Successfully connected to redis"));
 
 
   async function login(email, password)    {
-    correctPassword=await checkPassword(email, password);
-    console.log("hallohallo:  "+ correctPassword)
-    if(correctPassword) {
-      console.log("hallohallohallo");
-      const sessionId=crypto.randomUUID();
-      await client.set(sessionId, email, { EX: 60 });
-      return sessionId;
-    } else  {
-      return undefined;
-
-    }
+    correctPassword=await checkPassword(email, password).then( (correctPassword) => {
+      console.log("hallohallo:  "+ correctPassword)
+      if(correctPassword) {
+        console.log("hallohallohallo");
+        const sessionId=crypto.randomUUID();
+        await client.set(sessionId, email, { EX: 60 });
+        return sessionId;
+      } else  {
+        return undefined;
+  
+      }
+    });
   }

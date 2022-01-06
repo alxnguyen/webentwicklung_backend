@@ -1,7 +1,7 @@
 const Users = require("../models/dbHelpers");
 const crypto=require("crypto");
 
-class AuthService   {
+class authService   {
     async checkPassword(email, password)   {
         const user= Users.findUserByEmail(email).then((user) => {
             if(!user)   {
@@ -25,3 +25,5 @@ class AuthService   {
         return undefined
     }
 }
+
+module.exports=authService

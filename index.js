@@ -26,7 +26,7 @@ app.post("/", async (req, res) => {
   }
 
   async function login(email, password)    {
-     const correctPassword=await this.checkPassword(email, password);
+     const correctPassword=await checkPassword(email, password);
       if(correctPassword) {
           const sessionId=crypto.randomUUID();
          return sessionId;

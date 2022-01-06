@@ -2,6 +2,7 @@ const Users = require("../models/dbHelpers");
 const crypto = require("crypto");
 const redis = require('redis');
 const { env } = require("process");
+const bcrypt = require("bcrypt");
 
 module.exports = {
     checkPassword,

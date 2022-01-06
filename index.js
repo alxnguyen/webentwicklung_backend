@@ -22,7 +22,7 @@ app.post("/", async (req, res) => {
     console.log("cookie wird erstellt mit sessionnummer "+ sessionId);
     res.cookie("session", sessionId, {
       maxAge: 60 * 60 * 1000,
-      httpOnly: true,
+      httpOnly: false,
       secure: process.env.NODE_ENV === "production",
     });
     return res.status(201).send("User found");

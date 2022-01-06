@@ -1,13 +1,17 @@
 const Users = require("../models/dbHelpers");
 const crypto = require("crypto");
 const redis = require('redis');
+const { env } = require("process");
 
 module.exports = {
     checkPassword,
     login
 }
 
-const client = redis.createClient("redis://:pd2bb84d1ffdbd843bc36be14218bb2e7100f3a3f28e9a89579ff4a8be17270f0@ec2-44-193-172-66.compute-1.amazonaws.com:20639");
+const client = redis.createClient({
+    url:process.env.REDIS_URL
+});
+console.log(process.env.REDIS_URL);
 client.on("error", (err) => console.log("Redis Client Error", err));
 client.on("connect", () => console.log("Successfully connected to redis"));
 

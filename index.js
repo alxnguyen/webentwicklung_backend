@@ -36,9 +36,6 @@ app.post("/", async (req, res) => {
 
   const email = req.body.email;
   const password = req.body.password;
-  //bugfixing
-  console.log(authService)
-  //bugfixing
   const sessionId = await this.login(email, password).then((sessionId)=> {
     if(!sessionId)  {
       return res.status(400).send("User Authentification failed");

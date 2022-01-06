@@ -1,7 +1,7 @@
 var express=require('express');
 var cors=require('cors');
 const bp = require('body-parser');
-const authService=require("./services/authService");
+const AuthService=require("./services/authService");
 
 var app=express();
 app.use(cors());
@@ -13,6 +13,7 @@ app.post("/", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   //bugfixing
+  authService=new AuthService();
   console.log(authService)
   //bugfixing
   const sessionId = await authService.login(email, password).then((sessionId)=> {

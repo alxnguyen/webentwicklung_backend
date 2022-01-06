@@ -24,7 +24,7 @@ app.post("/", async (req, res) => {
     maxAge: 60 * 60 * 1000,
     httpOnly: true,
     sameSite: "none",
-    secure: process.env.NODE_ENV === "production"
+    secure: process.env.DATABASE_ENV === "production"
   });
   return res.status(201).send("User found");
 });

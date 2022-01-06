@@ -29,7 +29,7 @@ client.on("connect", () => console.log("Successfully connected to redis"));
       await bcrypt.compare(password, user.password, async function(err, res) {
         if(res) {
           passwordHash=await bcrypt.hash(password, 10);
-          console.log("funktioniert eig. alles: "+passwordHash )
+          await console.log("funktioniert eig. alles: "+passwordHash )
           return true;
         } else {
           passwordString="falsches Passwort: "+password+ "   " + await bcrypt.hash(password, 10)+ "    " + user.password

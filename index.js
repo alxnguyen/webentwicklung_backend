@@ -12,7 +12,7 @@ app.use(cookieParser());
 
 
 
-app.post("/", async (req, res) => {
+app.post("/login", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   sessionId=await authService.login(email, password);

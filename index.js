@@ -9,10 +9,11 @@ app.use(express.json());
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.set('trust proxy',1)
 
 
 
-app.post("/login", async (req, res) => {
+app.post("/", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   sessionId=await authService.login(email, password);
@@ -24,6 +25,7 @@ app.post("/login", async (req, res) => {
     console.log("kein cookie da");
     console.log("cookie wird erstellt mit sessionnummer "+ sessionId);
     res.cookie("session", sessionId, {
+      sameSite: true,
       maxAge: 60 * 60 * 1000,
       httpOnly: false
     });

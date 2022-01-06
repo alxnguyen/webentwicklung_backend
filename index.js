@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 
-app.post("/", (req, res) => {
+app.post("/", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   const sessionId = await authService.login(email, password);

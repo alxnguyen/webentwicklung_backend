@@ -23,7 +23,7 @@ class authService   {
             return sessionId;
         }
         return undefined
-    }
+    }   
 }
 
-exports.login=login
+module.exports.login=login

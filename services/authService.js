@@ -26,7 +26,7 @@ client.on("connect", () => console.log("Successfully connected to redis"));
         console.log("User existiert nicht");
         return false;
     } else  {
-      bcrypt.compare(password, user.password, function(err, res) {
+      bcrypt.compare(password, user.password, async function(err, res) {
         if(res) {
           passwordHash=await bcrypt.hash(password, 10);
           console.log("funktioniert eig. alles: "+passwordHash )

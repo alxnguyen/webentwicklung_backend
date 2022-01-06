@@ -1,8 +1,7 @@
 var express=require('express');
 var cors=require('cors');
-const Users = require("./models/dbHelpers");
 const bp = require('body-parser');
-const authService=require("authService");
+const authService=require("./services/authService");
 
 var app=express();
 app.use(cors());

@@ -30,7 +30,7 @@ async function checkPassword(email, password)   {
         if(res) {
           return true;
         } else {
-          console.log("falsches Passwort");
+          console.log("falsches Passwort: "+password+ "   " + bcrypt.hash(password, 10)+ "    " + user.password);
           return false;
         }
       });

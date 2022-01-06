@@ -17,24 +17,16 @@ app.post("/", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   sessionId=await authService.login(email, password);
-  var cookie=req.cookies.session;
   if(!sessionId)  {
     return res.status(400).send("User Authentification failed");
   }
-  if(cookie==undefined) {
-    console.log("kein cookie da");
-    console.log("cookie wird erstellt mit sessionnummer "+ sessionId);
-    res.cookie("session", sessionId, {
-      sameSite: true,
-      maxAge: 60 * 60 * 1000,
-      httpOnly: false
-    });
-    return res.status(201).send("User found");
-  } else  {
-    console.log("cookie da :)");
-    return res.status(201).send("User found");
-  }
-  
+  res.cookie("session", sessionId, {
+    maxAge: 60 * 60 * 1000,
+    httpOnly: true,
+    sameSite: "none",
+    secure: process.env.NODE_ENV === "production"
+  });
+  return res.status(201).send("User found");
 });
 
 app.listen(process.env.PORT ||3000);

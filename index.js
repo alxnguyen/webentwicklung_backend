@@ -14,12 +14,15 @@ app.post("/", async (req, res) => {
     async function checkPassword(email, password)   {
       const user= Users.findUserByEmail(email).then((user) => {
           if(!user)   {
+              console.log("user existiert nicht");
               return false;
          } else  {
              if(password==user.password) {
-                  return true;
+                console.log("user und passwort existieren");
+                return true;
               } else  {
-                  return false;
+                console.log("User existiert, passwort nicht");
+                return false;
              }
          }
       });
@@ -38,7 +41,6 @@ app.post("/", async (req, res) => {
   const password = req.body.password;
   const sessionId = await login(email, password).then((sessionId)=> {
     if(!sessionId)  {
-      console.log("penis");
       return res.status(400).send("User Authentification failed");
     } else  {
       return res.status(201).send("User found");

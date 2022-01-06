@@ -21,14 +21,10 @@ client.on("connect", () => console.log("Successfully connected to redis"));
 
 
   async function checkPassword(email, password)   {
-    console.log("checkpassword startet"); 
     const user= await Users.findUserByEmail(email);
-    console.log("user gefunden: "+"user");
     if(!user)   {
-        console.log("User existiert nicht");
         return false;
     } else  {
-      console.log("else-schlange begonnen");
       res=await bcrypt.compare(password, user.password);
       console.log(res);
         if(res) {

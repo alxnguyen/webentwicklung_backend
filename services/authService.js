@@ -39,6 +39,8 @@ async function checkPassword(email, password)   {
       await client.set(sessionId, email, { EX: 60 });
       return sessionId;
     } else  {
+      console.log("ich bins: "+email + password);
       return undefined;
+
     }
   }

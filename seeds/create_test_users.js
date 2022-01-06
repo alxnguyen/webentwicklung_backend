@@ -1,26 +1,5 @@
 const bcrypt = require("bcrypt");
 
-<<<<<<< HEAD
-const saltRounds = 10;
-
-var password1;
-var password2;
-var password3;
-
-bcrypt.hash("password1", saltRounds, function(err, hash) {
-  password1 = hash;
-});
-
-bcrypt.hash("password2", saltRounds, function(err, hash) {
-  password2 = hash;
-});
-
-bcrypt.hash("password3", saltRounds, function(err, hash) {
-  password3 = hash;
-});
-
-=======
->>>>>>> main
 exports.seed = function(knex) {
   // Deletes ALL existing entries
   return knex('users').del()

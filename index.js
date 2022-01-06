@@ -13,20 +13,20 @@ app.use(bp.urlencoded({ extended: true }))
 
 app.post("/", async (req, res) => {
   async function checkPassword(email, password)   {
-    const user= Users.findUserByEmail(email).then((user) => {
-      if(!user)   {
-        console.log("user existiert nicht");
-        return false;
+    console.log("checkpassword wird aufgerufen")
+    const user= await Users.findUserByEmail(email)
+    if(!user)   {
+      console.log("user existiert nicht");
+      return false;
+    } else  {
+      if(password==user.password) {
+        console.log("user und passwort existieren");
+        return true;
       } else  {
-          if(password==user.password) {
-            console.log("user und passwort existieren");
-            return true;
-          } else  {
-            console.log("User existiert, passwort nicht");
-            return false;
-          }
+        console.log("User existiert, passwort nicht");
+        return false;
       }
-    });
+    }
   }
 
   async function login(email, password)    {
@@ -37,7 +37,7 @@ app.post("/", async (req, res) => {
       return sessionId;
     } else  {
       console.log("wtf");
-      return undefined
+      return undefined;
     }
   }
 
@@ -46,8 +46,10 @@ app.post("/", async (req, res) => {
   sessionId=await login(email, password);
   console.log("loginfunktion durch");
   if(!sessionId)  {
+    console.log("fierhundat");
     return res.status(400).send("User Authentification failed");
   } else  {
+    console.log("zweihundateins");
     return res.status(201).send("User found");
   }
 });

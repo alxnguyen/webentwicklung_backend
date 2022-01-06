@@ -19,6 +19,7 @@ app.post("/", async (req, res) => {
   if(!sessionId)  {
     return res.status(400).send("User Authentification failed");
   } else  {
+    console.log("cookie wird erstellt");
     res.cookie("session", sessionId, {
       maxAge: 60 * 60 * 1000,
       httpOnly: true,

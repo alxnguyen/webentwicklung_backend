@@ -29,14 +29,15 @@ app.post("/", async (req, res) => {
   }
 
   async function login(email, password)    {
-     const correctPassword=await checkPassword(email, password);
+     const correctPassword=await checkPassword(email, password).then((correctPassword)=>  {
       if(correctPassword) {
-          console.log("erstelle sessionId");
-          const sessionId=crypto.randomUUID();
-         return sessionId;
-      }
-      console.log("wtf");
-     return undefined
+        console.log("erstelle sessionId");
+        const sessionId=crypto.randomUUID();
+       return sessionId;
+    }
+    console.log("wtf");
+   return undefined
+     });
   }
 
   const email = req.body.email;

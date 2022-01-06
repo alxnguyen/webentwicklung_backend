@@ -26,7 +26,6 @@ client.on("connect", () => console.log("Successfully connected to redis"));
         return false;
     } else  {
       res=await bcrypt.compare(password, user.password);
-      console.log(res);
         if(res) {
           return true;
         } else {

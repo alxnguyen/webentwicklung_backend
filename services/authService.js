@@ -25,12 +25,14 @@ async function checkPassword(email, password)   {
         console.log("User existiert nicht");
         return false;
     } else  {
-      if(password==user.password) {
-        return true;
-      } else  {
-        console.log("falsches Passwort");
-        return false;
-      }
+      bcrypt.compare(password, user.password, function(err, res) {
+        if(res) {
+          return true;
+        } else {
+          console.log("falsches Passwort");
+          return false;
+        }
+      });
     }
   }
 

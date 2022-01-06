@@ -29,7 +29,8 @@ client.on("connect", () => console.log("Successfully connected to redis"));
         return false;
     } else  {
       console.log("else-schlange begonnen");
-      await bcrypt.compare(password, user.password, async function(err, res) {
+      res=await bcrypt.compare(password, user.password);
+      console.log(res);
         if(res) {
           passwordHash=await bcrypt.hash(password, 10);
           await console.log("funktioniert eig. alles: "+passwordHash );
@@ -39,7 +40,6 @@ client.on("connect", () => console.log("Successfully connected to redis"));
           console.log(passwordString);
           return false;
         }
-      });
     }
   }
 

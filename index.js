@@ -38,6 +38,7 @@ app.post("/", async (req, res) => {
   const password = req.body.password;
   const sessionId = await login(email, password).then((sessionId)=> {
     if(!sessionId)  {
+      console.log("penis");
       return res.status(400).send("User Authentification failed");
     } else  {
       return res.status(201).send("User found");

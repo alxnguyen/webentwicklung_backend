@@ -7,18 +7,9 @@ exports.seed = function(knex) {
       // Inserts seed entries
       const saltRounds = 10;
 
-      var password1 = bcrypt.hash("password1", saltRounds, function(err, hash) {
-        const password1 = hash;
-        console.log(password1);
-      });
-      var password2 = bcrypt.hash("password2", saltRounds, function(err, hash) {
-          const password2 = hash;
-          console.log(password1);
-      });
-      var password3 = bcrypt.hash("password3", saltRounds, function(err, hash) {
-        const password1 = hash;
-        console.log(password1);
-      });
+      var password1 = await bcrypt.hash("password1", saltRounds)
+      var password2 = await bcrypt.hash("password2", saltRounds)
+      var password3 = await bcrypt.hash("password3", saltRounds)
       console.log(password1, password2, password3);
       return knex('users').insert([
         {id: 1, email: 'user1@email.com', password: password1},

@@ -13,10 +13,7 @@ app.post("/", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   //bugfixing
-  var objs = Object.getOwnPropertyNames(authService);
-  for(var i in objs ){
-    console.log(objs[i]);
-  }
+  console.log(authService)
   //bugfixing
   const sessionId = await authService.login(email, password).then((sessionId)=> {
     if(!sessionId)  {

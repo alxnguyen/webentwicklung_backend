@@ -3,7 +3,7 @@ var cors=require('cors');
 const authService=require("./services/authService");
 const bp = require('body-parser');
 var app=express();
-var cookieParser=require("cookie-parser");
+const cookieParser=require("cookie-parser");
 app.use(cors());
 app.use(express.json());
 app.use(bp.json());
@@ -25,8 +25,7 @@ app.post("/", async (req, res) => {
     console.log("cookie wird erstellt mit sessionnummer "+ sessionId);
     res.cookie("session", sessionId, {
       maxAge: 60 * 60 * 1000,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      httpOnly: false
     });
     return res.status(201).send("User found");
   } else  {

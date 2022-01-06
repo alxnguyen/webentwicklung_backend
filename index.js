@@ -12,6 +12,7 @@ app.use(bp.urlencoded({ extended: true }))
 app.post("/", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
+  console.log("Hallowelt")
   const sessionId = await authService.login(email, password).then((sessionId)=> {
     if(!sessionId)  {
       return res.status(400).send("User Authentification failed");

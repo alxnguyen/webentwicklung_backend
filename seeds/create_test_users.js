@@ -22,6 +22,7 @@ exports.seed = function(knex) {
       bcrypt.hash("password3", saltRounds, function(err, hash) {
         password3 = hash;
       });
+      console.log(password1, password2, password3)
       return knex('users').insert([
         {id: 1, email: 'user1@email.com', password: password1},
         {id: 2, email: 'user2@email.com', password: password2},

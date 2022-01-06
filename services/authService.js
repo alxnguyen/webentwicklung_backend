@@ -20,22 +20,21 @@ client.on("connect", () => console.log("Successfully connected to redis"));
   })();
 
 
-async function checkPassword(email, password)   {
-    const user= await Users.findUserByEmail(email)
+  async function checkPassword(email, password)   {
+    const user= await Users.findUserByEmail(email);
     if(!user)   {
-        console.log("User existiert nicht");
         return false;
     } else  {
-      bcrypt.compare(password, user.password, function(err, res) {
+      res=await bcrypt.compare(password, user.password);
+      console.log(res);
         if(res) {
           return true;
         } else {
-          console.log("falsches Passwort");
           return false;
         }
-      });
     }
   }
+
 
   async function login(email, password)    {
     correctPassword=await checkPassword(email, password);
@@ -45,6 +44,5 @@ async function checkPassword(email, password)   {
       return sessionId;
     } else  {
       return undefined;
-
     }
   }

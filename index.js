@@ -14,12 +14,9 @@ app.post("/", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   sessionId=await authService.login(email, password);
-  console.log("loginfunktion durch");
   if(!sessionId)  {
-    console.log("fierhundat");
     return res.status(400).send("User Authentification failed");
   } else  {
-    console.log("zweihundateins");
     return res.status(201).send("User found");
   }
 });

@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.set('trust proxy',1)
+app.set('trust proxy', 1);
 
 
 
@@ -27,7 +27,8 @@ app.post("/", async (req, res) => {
     res.cookie("session", sessionId, {
       sameSite: true,
       maxAge: 60 * 60 * 1000,
-      httpOnly: false
+      httpOnly: false,
+      secure: true
     });
     return res.status(201).send("User found");
   } else  {

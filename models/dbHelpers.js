@@ -2,7 +2,8 @@ const knexfile = require("../knexfile");
 const db = require("../knexSetup");
 
 module.exports = {
-    findUserByEmail
+    findUserByEmail,
+    createUser
 }
 
 async function createUser(newEmail, hashedPassword)  {

@@ -45,7 +45,7 @@ app.post("/register", async (req, res) =>   {
     console.log("User wurde erstellt");
     return res.status(201).send("User created");
   } else  {
-    console.log("irgendwas ist schiefgelaufen");
+    console.log("irgendwas ist schiefgelaufen "+ createdEmail);
     return res.status(500).send("we fucked up somehow");
   }
 })

@@ -36,5 +36,16 @@ app.post("/", async (req, res) => {
   }
   
 });
-
+app.post("/register", async (req, res) =>   {
+  var email=req.body.email;
+  var password=req.body.password;
+  var createdEmail=await authService.register(email, password);
+  if (createdEmail==email)  {
+    console.log("User wurde erstellt");
+    return res.status(201).send("User created");
+  } else  {
+    console.log("irgendwas ist schiefgelaufen");
+    return res.status(500).send("we fucked up somehow");
+  }
+})
 app.listen(process.env.PORT ||3000);

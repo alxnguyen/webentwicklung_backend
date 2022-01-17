@@ -35,6 +35,12 @@ client.on("connect", () => console.log("Successfully connected to redis"));
   }
 
 
+  async function register(email, password)  {
+    var hashedPassword=bcrypt.hash(password, "10");
+    var insertedMail=await Users.createUser(email, hashedPassword);
+    return insertedMail;
+  }
+
   async function login(email, password)    {
     correctPassword=await checkPassword(email, password);
     if(correctPassword) {

@@ -40,13 +40,13 @@ app.post("/register", async (req, res) =>   {
   console.log("request ist angekommen");
   var email=req.body.email;
   var password=req.body.password;
-  var createdUser=await authService.register(email, password);
-  if (createdUser==email)  {
+  var createdMail=await authService.register(email, password);
+  if (createdMail==email)  {
     console.log("User wurde erstellt");
     return res.status(201).send("User created");
   } else  {
-    console.log("irgendwas ist schiefgelaufen "+ createdUser);
-    return res.status(500).send("we fucked up somehow");
+    console.log("irgendwas ist schiefgelaufen "+ createdMail);
+    return res.status(500).send("we messed up somehow");
   }
 })
 app.listen(process.env.PORT ||3000);

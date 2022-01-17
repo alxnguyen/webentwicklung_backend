@@ -40,13 +40,17 @@ app.post("/register", async (req, res) =>   {
   console.log("request ist angekommen");
   var email=req.body.email;
   var password=req.body.password;
-  var createdMail=await authService.register(email, password);
-  if (createdMail==email)  {
-    console.log("User wurde erstellt");
-    return res.status(201).send("User created");
-  } else  {
-    console.log("irgendwas ist schiefgelaufen "+ createdMail);
-    return res.status(500).send("we messed up somehow");
+  try {
+    var createdMail=await authService.register(email, password);
+    if (createdMail==email)  {
+      console.log("User wurde erstellt");
+      return res.status(201).send("User created");
+    } else  {
+      console.log("irgendwas ist schiefgelaufen "+ createdMail);
+      return res.status(500).send("we messed up somehow");
+    }
+  } catch (UnhandledPromiseRejectionWarning) {
+    return res.status(409).send("User already exists")
   }
 })
 app.listen(process.env.PORT ||3000);

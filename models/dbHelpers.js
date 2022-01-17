@@ -7,13 +7,11 @@ module.exports = {
 }
 
 async function createUser(newEmail, hashedPassword)  {
-    db("users").insert({
+    user=await db("users").insert({
         email:newEmail,
         password:hashedPassword
-    }).returning("email")
-    .then(function (email)  {
-        return email;
-    })
+    });
+    return user
 }
 
 async function findUserByEmail(email) {

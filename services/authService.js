@@ -40,8 +40,8 @@ client.on("connect", () => console.log("Successfully connected to redis"));
     console.log("Passwort wird gehashed");
     var hashedPassword=await bcrypt.hash(password, 10);
     console.log("Passwort wurde gehashed"+hashedPassword);
-    var insertedMail=await Users.createUser(email, hashedPassword);
-    return insertedMail;
+    var insertedUser=await Users.createUser(email, hashedPassword);
+    return insertedUser;
   }
 
   async function login(email, password)    {

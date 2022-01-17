@@ -24,7 +24,7 @@ app.post("/", async (req, res) => {
     console.log("kein cookie da");
     console.log("cookie wird erstellt mit sessionnummer "+ sessionId);
     res.cookie("session", sessionId, {
-      sameSite: true,
+      sameSite: "none",
       maxAge: 60 * 60 * 1000,
       httpOnly: false,
       secure: true

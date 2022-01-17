@@ -6,7 +6,8 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
     checkPassword,
-    login
+    login,
+    register
 }
 
 const client = redis.createClient({

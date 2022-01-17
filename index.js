@@ -37,6 +37,7 @@ app.post("/", async (req, res) => {
   
 });
 app.post("/register", async (req, res) =>   {
+  console.log("request ist angekommen");
   var email=req.body.email;
   var password=req.body.password;
   var createdEmail=await authService.register(email, password);

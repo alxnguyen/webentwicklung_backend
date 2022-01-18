@@ -13,6 +13,7 @@ app.use(cookieParser());
 app.set('trust proxy', 1);
 
 app.post("/", async (req, res) => {
+  res.set('Access-Control-Allow-Origin', 'https://hungry-tereshkova-7ccef7.netlify.app');
   const email = req.body.email;
   const password = req.body.password;
   sessionId=await authService.login(email, password);

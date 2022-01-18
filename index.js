@@ -48,7 +48,7 @@ app.post("/", async (req, res) => {
     });
     return res.status(201).send("User found");
   } else  {
-    console.log("cookie da :)");
+    console.log("cookie da. Session="+cookie);
     return res.status(201).send("User found");
   }
   

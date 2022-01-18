@@ -51,4 +51,10 @@ client.on("connect", () => console.log("Successfully connected to redis"));
     } else  {
       return undefined;
     }
+
+    async function getUserEmailForSession(sessionId)  {
+      email=await client.get(sessionId);
+      return email;
+    }
+
   }

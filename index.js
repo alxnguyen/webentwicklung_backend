@@ -5,7 +5,7 @@ const bp = require('body-parser');
 var app=express();
 const cookieParser=require("cookie-parser");
 app.use(cors());
-app.use(cors({credentials: true, origin: 'https://hungry-tereshkova-7ccef7.netlify.app'}));
+app.use(cors({credentials: true, origin: true}));
 app.use(express.json());
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));

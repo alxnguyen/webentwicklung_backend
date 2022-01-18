@@ -5,15 +5,18 @@ const bp = require('body-parser');
 var app=express();
 const cookieParser=require("cookie-parser");
 app.use(cors());
-app.use(cors({credentials: true, origin: 'https://hungry-tereshkova-7ccef7.netlify.app'}));
 app.use(express.json());
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set('trust proxy', 1);
 
-app.post("/", async (req, res) => {
-  res.set('Access-Control-Allow-Origin', 'https://hungry-tereshkova-7ccef7.netlify.app');
+var corsOptions= {
+  credentials: true, 
+  origin: 'https://hungry-tereshkova-7ccef7.netlify.app'
+}
+
+app.post("/", cors(corsOptions), async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   sessionId=await authService.login(email, password);

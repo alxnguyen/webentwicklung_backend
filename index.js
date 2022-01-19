@@ -15,12 +15,13 @@ app.use(cors({
   origin: 'https://hungry-tereshkova-7ccef7.netlify.app'
 }));
 
-const checkLogin = async (req, res, next) => {
-  const cookie = req.cookies.session;
+var checkLogin = async function (req, res, next)  {
+  var cookie = req.cookies.session;
   if (!cookie) {
     return res.status(409).send("You need to be logged in to see this page." );
   }
-  const email = await authService.getEmailForSession(cookie);
+  var email = await authService.getEmailForSession(cookie);
+  console.log("email des Dudes: "+email);
   if (!email) {
     return res.status(409).send("You need to be logged in to see this page.");
   }

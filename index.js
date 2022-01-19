@@ -18,12 +18,12 @@ app.use(cors({
 var checkLogin = async (req, res, next) => {
   var cookie = req.cookies.session;
   if (!cookie) {
-    return res.status(409).send("You need to be logged in to see this page." );
+    return res.json({message:"You need to be logged in to see this page."} );
   }
   var email = await authService.getEmailForSession(cookie);
   console.log("email des Dudes: "+email);
   if (!email) {
-    return res.status(409).send("You need to be logged in to see this page.");
+    return res.json({message:"You need to be logged in to see this page."});
   }
   req.userEmail = email;
 

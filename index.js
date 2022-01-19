@@ -41,20 +41,15 @@ app.post("/", async (req, res) => {
   if(!sessionId)  {
     return res.status(400).send("User Authentification failed");
   }
-  if(cookie==undefined) {
-    console.log("kein cookie da");
-    console.log("cookie wird erstellt mit sessionnummer "+ sessionId);
-    res.cookie("session", sessionId, {
-      sameSite: "none",
-      maxAge: 60 * 60 * 1000,
-      httpOnly: false,
-      secure: true
-    });
-    return res.status(201).send("User found");
-  } else  {
-    console.log("cookie da. Session="+cookie);
-    return res.status(201).send("User found");
-  }
+  console.log("cookie wird erstellt mit sessionnummer "+ sessionId);
+  res.cookie("session", sessionId, {
+    sameSite: "none",
+    maxAge: 60 * 60 * 1000,
+    httpOnly: false,
+    secure: true
+  });
+  return res.status(201).send("User found");
+  
   
 });
 app.post("/register", async (req, res) =>   {

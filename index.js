@@ -78,7 +78,7 @@ app.post("/register", async (req, res) =>   {
 //  return res.status(201).send(trips);
 //});
 
-//app.post("/edittrip", checkLogin(), async (req, res) => {
+app.post("/edittrip", checkLogin(), async (req, res) => {
 //  var tripname = req.body.tripname;
 //  var land = req.body.land;
 //  var start = req.body.start;
@@ -96,6 +96,7 @@ app.post("/register", async (req, res) =>   {
 //  if(savedTripname!=undefined&&savedTripname==tripname) {
 //    return res.status(201).send("Trip wurde erstellt");
 //  } else return res.status(500).send("irgendetwas ist schiefgelaufen");
-//});
+return res.status(200).send("testtesttest");
+});
 
 app.listen(process.env.PORT ||3000);

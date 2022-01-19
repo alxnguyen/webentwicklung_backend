@@ -50,7 +50,7 @@ client.on("connect", () => console.log("Successfully connected to redis"));
     correctPassword=await checkPassword(email, password);
     if(correctPassword) {
       const sessionId=crypto.randomUUID();
-      await client.set(sessionId, email, { EX: 60 });
+      await client.set(sessionId, email, { EX: 60*60*1000 });
       return sessionId;
     } else  {
       return undefined;

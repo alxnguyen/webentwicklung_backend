@@ -76,6 +76,7 @@ app.post("/register", async (req, res) =>   {
 });
 
 app.get("/edittrip", checkLogin, async (req, res) =>  {
+  console.log("UserMail="+req.userEmail);
   trips=await dbHelpers.readTrips(req.userEmail);
   console.log("trips"+trips);
   return res.status(201).send(trips);

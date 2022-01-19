@@ -72,12 +72,11 @@ app.post("/register", async (req, res) =>   {
 });
 
 app.post("/edittrip", async (req, res) => {
-  var user = req.body.user;
   var tripname = req.body.tripname;
   var land = req.body.land;
   var start = req.body.start;
   var ende = req.body.ende;
   var date = req.body.date;
-  
+
 });
 app.listen(process.env.PORT ||3000);

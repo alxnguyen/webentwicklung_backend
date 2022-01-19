@@ -20,9 +20,8 @@ async function findUserByEmail(email) {
     return user;
 }
 
-async function createTrip(user, tripname, land, start, ende, created)  {
+async function createTrip(tripname, land, start, ende, created)  {
     new_trip=await db("trips").insert({
-        user:user,
         tripname:tripname,
         land:land,
         start:start,

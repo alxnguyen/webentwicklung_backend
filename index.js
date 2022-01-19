@@ -24,7 +24,7 @@ const checkLogin =async (req, res, next) =>{
   var email = await authService.getEmailForSession(cookie);
   console.log("email des Dudes: "+email);
   if (!email) {
-    console.log("keine Email bekommen. Cookie: "+cookie*" Mail: "+email);
+    console.log("keine Email bekommen. Cookie: "+cookie+" Mail: "+email);
     return res.status(409).send("You need to be logged in to see this page.");
   }
   req.userEmail = email;
@@ -75,8 +75,7 @@ app.post("/register", async (req, res) =>   {
   }
 });
 
-app.get("/edittrip", checkLogin, async (req, res) =>  {
-  console.log("UserMail="+req.userEmail);
+app.get("/edittrip", checkLogin, async (req, res) =>  { 
   trips=await dbHelpers.readTrips(req.userEmail);
   console.log("trips"+trips);
   return res.status(201).send(trips);

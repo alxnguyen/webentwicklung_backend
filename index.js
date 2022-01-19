@@ -78,24 +78,24 @@ app.post("/register", async (req, res) =>   {
 //  return res.status(201).send(trips);
 //});
 
-app.post("/edittrip", checkLogin(), async (req, res) => {
-  var tripname = req.body.tripname;
-  var land = req.body.land;
-  var start = req.body.start;
-  var ende = req.body.ende;
-  var date = req.body.date;
-  var mail = req.userEmail;
-
-  console.log("tripname: "+tripname);
-  console.log("land: "+land);
-  console.log("start: "+start);
-  console.log("ende: "+ende);
-  console.log("date: "+date);
-  console.log("mail: "+mail);
-  savedTripname=await dbHelpers.createTrip(mail, tripname, land, start ,ende, date,)
-  if(savedTripname!=undefined&&savedTripname==tripname) {
-    return res.status(201).send("Trip wurde erstellt");
-  } else return res.status(500).send("irgendetwas ist schiefgelaufen");
-});
+//app.post("/edittrip", checkLogin(), async (req, res) => {
+//  var tripname = req.body.tripname;
+//  var land = req.body.land;
+//  var start = req.body.start;
+//  var ende = req.body.ende;
+//  var date = req.body.date;
+//  var mail = req.userEmail;
+//
+//  console.log("tripname: "+tripname);
+//  console.log("land: "+land);
+//  console.log("start: "+start);
+//  console.log("ende: "+ende);
+//  console.log("date: "+date);
+//  console.log("mail: "+mail);
+//  savedTripname=await dbHelpers.createTrip(mail, tripname, land, start ,ende, date,)
+//  if(savedTripname!=undefined&&savedTripname==tripname) {
+//    return res.status(201).send("Trip wurde erstellt");
+//  } else return res.status(500).send("irgendetwas ist schiefgelaufen");
+//});
 
 app.listen(process.env.PORT ||3000);

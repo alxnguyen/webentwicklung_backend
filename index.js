@@ -15,7 +15,7 @@ app.use(cors({
   origin: 'https://hungry-tereshkova-7ccef7.netlify.app'
 }));
 
-var checkLogin = async function (req, res, next)  {
+var checkLogin = async (req, res, next) => {
   var cookie = req.cookies.session;
   if (!cookie) {
     return res.status(409).send("You need to be logged in to see this page." );
@@ -27,7 +27,7 @@ var checkLogin = async function (req, res, next)  {
   }
   req.userEmail = email;
 
-  await next();
+  next();
 };
 
 
@@ -79,7 +79,7 @@ app.post("/register", async (req, res) =>   {
 //  return res.status(201).send(trips);
 //});
 
-app.post("/edittrip", checkLogin(), async (req, res) => {
+app.post("/edittrip", checkLogin(), (req, res) => {
 //  var tripname = req.body.tripname;
 //  var land = req.body.land;
 //  var start = req.body.start;

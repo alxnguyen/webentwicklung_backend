@@ -18,11 +18,13 @@ app.use(cors({
 const checkLogin =async (req, res, next) =>{
   var cookie = req.cookies.session;
   if (!cookie) {
+    console.log("kein cookie da: "+cookie);
     return res.status(409).send("You need to be logged in to see this page." );
   }
   var email = await authService.getEmailForSession(cookie);
   console.log("email des Dudes: "+email);
   if (!email) {
+    console.log("keine Email bekommen. Cookie: "+cookie*" Mail: "+email);
     return res.status(409).send("You need to be logged in to see this page.");
   }
   req.userEmail = email;

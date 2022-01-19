@@ -32,7 +32,7 @@ async function createTrip(email, tripname, land, start, ende, created)  {
         tripname:tripname,
         land:land,
         start:start,
-        ende:ende,
+        end:ende,
         created:created
     }).returning("tripname");
     return new_trip;

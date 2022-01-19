@@ -1,6 +1,7 @@
 var express=require('express');
 var cors=require('cors');
 const authService=require("./services/authService");
+const dbHelpers = require("./models/dbHelpers");
 const bp = require('body-parser');
 var app=express();
 const cookieParser=require("cookie-parser");
@@ -21,7 +22,7 @@ const checkLogin = async (req, res, next) => {
   }
   const email = await authService.getEmailForSession(cookie);
   if (!email) {
-    return res.status(409).send("You need to be logged in to see this page.")
+    return res.status(409).send("You need to be logged in to see this page.");
   }
   req.userEmail = email;
 
@@ -67,16 +68,33 @@ app.post("/register", async (req, res) =>   {
       return res.status(500).send("we messed up somehow");
     }
   } catch (UnhandledPromiseRejectionWarning) {
-    return res.status(409).send("User already exists")
+    return res.status(409).send("User already exists");
   }
 });
 
-app.post("/edittrip", async (req, res) => {
+app.get("/edittrip", checkLogin(), async (req, res) =>  {
+  trips=dbHelpers.readTrips(req.userEmail);
+  console.log("trips"+trips);
+});
+
+app.post("/edittrip", checkLogin(), async (req, res) => {
   var tripname = req.body.tripname;
   var land = req.body.land;
   var start = req.body.start;
   var ende = req.body.ende;
   var date = req.body.date;
+  var mail = req.userEmail;
 
+  console.log("tripname: "+tripname);
+  console.log("land: "+land);
+  console.log("start: "+start);
+  console.log("ende: "+ende);
+  console.log("date: "+date);
+  console.log("mail: "+mail);
+  savedTripname=await dbHelpers.createTrip(mail, tripname, land, start ,ende, date,)
+  if(savedTripname!=undefined&&savedTripname==tripname) {
+    return res.status(201).send("Trip wurde erstellt");
+  } else return res.status(500).send("irgendetwas ist schiefgelaufen");
 });
+
 app.listen(process.env.PORT ||3000);

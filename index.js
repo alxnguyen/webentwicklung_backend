@@ -80,7 +80,7 @@ app.post("/edittrip", checkLogin, async (req, res) => {
   var tripname = req.body.tripname;
   var land = req.body.land;
   var start = req.body.start;
-  var ende = req.body.ende;
+  var ende = req.body.end;
   var date = req.body.date;
   var mail = req.userEmail;
 

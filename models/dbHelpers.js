@@ -3,7 +3,8 @@ const db = require("../knexSetup");
 
 module.exports = {
     findUserByEmail,
-    createUser
+    createUser,
+    createTrip
 }
 
 async function createUser(newEmail, hashedPassword)  {
@@ -11,10 +12,22 @@ async function createUser(newEmail, hashedPassword)  {
         email:newEmail,
         password:hashedPassword
     }).returning("email");
-    return mail
+    return mail;
 }
 
 async function findUserByEmail(email) {
     user=await db("users").where({email}).first();
     return user;
+}
+
+async function createTrip(user, tripname, land, start, ende, created)  {
+    new_trip=await db("trips").insert({
+        user:user,
+        tripname:tripname,
+        land:land,
+        start:start,
+        ende:ende,
+        created:created
+    }).returning("email");
+    return new_trip;
 }

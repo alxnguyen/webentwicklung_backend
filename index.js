@@ -20,11 +20,11 @@ const checkLogin = (req, res, next) =>{
   if (!cookie) {
     return res.status(409).send("You need to be logged in to see this page." );
   }
-//    var email = await authService.getEmailForSession(cookie);
-//    console.log("email des Dudes: "+email);
-//    if (!email) {
-//      return res.status(409).send("You need to be logged in to see this page.");
-//    }
+  var email = await authService.getEmailForSession(cookie);
+  console.log("email des Dudes: "+email);
+  if (!email) {
+    return res.status(409).send("You need to be logged in to see this page.");
+  }
   req.userEmail = email;
 
   next();

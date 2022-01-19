@@ -15,16 +15,16 @@ app.use(cors({
   origin: 'https://hungry-tereshkova-7ccef7.netlify.app'
 }));
 
-var checkLogin = (req, res, next) =>{
+const checkLogin = (req, res, next) =>{
   var cookie = req.cookies.session;
   if (!cookie) {
     return res.status(409).send("You need to be logged in to see this page." );
   }
-//  var email = await authService.getEmailForSession(cookie);
-//  console.log("email des Dudes: "+email);
-//  if (!email) {
-//    return res.status(409).send("You need to be logged in to see this page.");
-//  }
+//    var email = await authService.getEmailForSession(cookie);
+//    console.log("email des Dudes: "+email);
+//    if (!email) {
+//      return res.status(409).send("You need to be logged in to see this page.");
+//    }
   req.userEmail = email;
 
   next();
@@ -79,7 +79,7 @@ app.post("/register", async (req, res) =>   {
 //  return res.status(201).send(trips);
 //});
 
-app.post("/edittrip", checkLogin(), async (req, res) => {
+app.post("/edittrip", checkLogin, async (req, res) => {
 //  var tripname = req.body.tripname;
 //  var land = req.body.land;
 //  var start = req.body.start;

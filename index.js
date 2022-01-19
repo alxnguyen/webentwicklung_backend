@@ -15,7 +15,7 @@ app.use(cors({
   origin: 'https://hungry-tereshkova-7ccef7.netlify.app'
 }));
 
-const checkLogin = (req, res, next) =>{
+const checkLogin =async (req, res, next) =>{
   var cookie = req.cookies.session;
   if (!cookie) {
     return res.status(409).send("You need to be logged in to see this page." );

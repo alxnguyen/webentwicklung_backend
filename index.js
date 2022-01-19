@@ -27,7 +27,7 @@ var checkLogin = async function (req, res, next)  {
   }
   req.userEmail = email;
 
-  next();
+  await next();
 };
 
 
@@ -79,7 +79,7 @@ app.post("/register", async (req, res) =>   {
 //  return res.status(201).send(trips);
 //});
 
-app.post("/edittrip", await checkLogin(), async (req, res) => {
+app.post("/edittrip", checkLogin(), async (req, res) => {
 //  var tripname = req.body.tripname;
 //  var land = req.body.land;
 //  var start = req.body.start;

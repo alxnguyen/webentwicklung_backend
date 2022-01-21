@@ -113,6 +113,13 @@ app.patch("/edittrip/:tripID", checkLogin, async (req, res) =>  {
   } else return res.status(409).send("User hat keinen Zugriff auf diese ID");
 });
 
+app.get("/map", checkLogin, async (req, res) => {
+  mail=req.userEmail;
+  countries=dbHelpers.readCountries(mail);
+  countryJson=JSON.stringify(countries);
+  console.log("trips"+countryJson);
+  return res.status(201).end(countryJson);
+})
 
 app.delete("/edittrip/:tripID", checkLogin, async (req, res) =>  {
   var id=req.params.tripID;

@@ -8,6 +8,7 @@ module.exports = {
     readTrips,
     deleteTrip,
     updateTrip,
+    readCountries,
     tripBelongsToUser
 }
 
@@ -34,6 +35,11 @@ async function tripBelongsToUser(tripId, userMail)  {
 async function readTrips(mail) {
     trips=await db("trips").where({email:mail}).returning(["tripname", "land", "start", "ende", "date"]);
     return trips;
+}
+
+async function readCountries(mail)  {
+    countries=await db("trips").where({email:mail}).distinctOn("land").returning("land");
+    return countries
 }
 async function updateTrip(tripID, tripname, land, start, ende)  {
     tripUpdated=await db("trips").where({id:tripID}).update({tripname:tripname, land:land, start:start, end:ende});

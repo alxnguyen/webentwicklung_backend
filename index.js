@@ -98,12 +98,14 @@ app.post("/edittrip", checkLogin, async (req, res) => {
 });
 
 app.patch("/edittrip/:tripID", checkLogin, async (req, res) =>  {
+
   var tripname = req.body.tripname;
   var land = req.body.land;
   var start = req.body.start;
   var ende = req.body.end;
   var mail = req.userEmail;
-  var id=req.params.tripID;
+  //gleiches wie beim loeschen
+  var id=parseInt(req.params.tripID);
   var tripBelongs=dbHelpers.tripBelongsToUser(id, mail);
   if(tripBelongs) {
     tripUpdated=dbHelpers.updateTrip(id, tripname, land, start, ende);
@@ -122,7 +124,8 @@ app.get("/map", checkLogin, async (req, res) => {
 })
 
 app.delete("/edittrip/:tripID", checkLogin, async (req, res) =>  {
-  var id=req.params.tripID;
+  //soll failen wenn nicht parse
+  var id=parseInt(req.params.tripID);
   var tripBelongs=dbHelpers.tripBelongsToUser(id, req.userEmail);
   if(tripBelongs) {
     gotDeleted=dbHelpers.deleteTrip(id);

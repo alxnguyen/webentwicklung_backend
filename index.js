@@ -97,4 +97,33 @@ app.post("/edittrip", checkLogin, async (req, res) => {
   } else return res.status(500).send("irgendetwas ist schiefgelaufen");
 });
 
+app.patch("/edittrip/:tripID", checkLogin, async (req, res) =>  {
+  var tripname = req.body.tripname;
+  var land = req.body.land;
+  var start = req.body.start;
+  var ende = req.body.end;
+  var mail = req.userEmail;
+  var id=req.params.tripID;
+  var tripBelongs=dbHelpers.tripBelongsToUser(id, mail);
+  if(tripBelongs) {
+    tripUpdated=dbHelpers.updateTrip(id, tripname, land, start, ende);
+    if(tripUpdated) {
+      return res.status(200).send("Trip wurde geupdated");
+    } else return res.status(500).send("irgendetwas ist schiefgelaufen");
+  } else return res.status(409).send("User hat keinen Zugriff auf diese ID");
+});
+
+
+app.delete("/edittrip/:tripID", checkLogin, async (req, res) =>  {
+  var id=req.params.tripID;
+  var tripBelongs=dbHelpers.tripBelongsToUser(id, req.userEmail);
+  if(tripBelongs) {
+    gotDeleted=dbHelpers.deleteTrip(id);
+    if(gotDeleted)  {
+      return res.status(200).send("Trip wurde geloescht");
+    } else return res.status(500).send("irgendetwas ist beim loeschen schief gelaufen");
+  } else return res.status(409).send("User hat keinen Zugriff auf diese ID");
+});
+
+
 app.listen(process.env.PORT ||3000);

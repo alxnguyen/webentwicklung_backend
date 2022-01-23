@@ -4,8 +4,6 @@ exports.up = function(knex) {
       table.increments("id");
       table.string("email").notNullable().unique();
       table.string("password").notNullable();
-      table.string("token").notNullable();
-      table.boolean("active").notNullable().defaultTo(false);
       table.timestamps(true, true);
   });
 };

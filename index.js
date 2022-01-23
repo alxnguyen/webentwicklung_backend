@@ -35,7 +35,7 @@ app.post("/", async (req, res) => {
   const password = req.body.password;
   sessionId=await authService.login(email, password);
   var cookie=req.cookies.session;
-  if(!sessionId)  {
+  if(sessionId==undefined)  {
     return res.status(400).send("User Authentification failed");
   }
   res.cookie("session", sessionId, {

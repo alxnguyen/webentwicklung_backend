@@ -3,25 +3,39 @@ const db = require("../knexSetup");
 
 module.exports = {
     findUserByEmail,
+    findUserById,
     createUser,
     createTrip,
     readTrips,
     deleteTrip,
     updateTrip,
     readCountries,
-    tripBelongsToUser
+    tripBelongsToUser,
+    activateUser,
+    findUserById
 }
 
-async function createUser(newEmail, hashedPassword)  {
-    mail=await db("users").insert({
+async function createUser(newEmail, hashedPassword, token)  {
+    id=await db("users").insert({
         email:newEmail,
-        password:hashedPassword
-    }).returning("email");
-    return mail;
+        password:hashedPassword,
+        token:token,
+        active:false
+    }).returning("id");
+    return id;
 }
 
+async function activateUser(id) {
+    userUpdated=await db("users").where({id:id}).update({active:true});
+    return userUpdated;
+}
+
+async function findUserById(id) {
+    user=await db("users").where({id:id}).first();
+    return userUpdated;
+}
 async function findUserByEmail(email) {
-    user=await db("users").where({email}).first();
+    user=await db("users").where({email:email}).first();
     return user;
 }
 async function tripBelongsToUser(tripId, userMail)  {

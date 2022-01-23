@@ -52,7 +52,7 @@ app.post("/register", async (req, res) =>   {
   var email=req.body.email;
   var password=req.body.password;
   try {
-    var createdMail=await authService.register(email, password);
+    var createdMail=await authService.register(email, password, token);
     if (createdMail==email)  {
       console.log("User wurde erstellt");
       return res.status(201).send("User created");
@@ -105,6 +105,16 @@ app.get("/map", checkLogin, async (req, res) => {
   countries=await dbHelpers.readCountries(mail);
   return res.status(201).end(JSON.stringify(countries));
 })
+
+app.get("/verify/:userID/:token"), (req, res) => {
+  var userID=req.params.userID;
+  var token=req.params.token;
+
+  userVerified=authService.verifyUser(userID, token);
+  if(userVerified)  {
+    return res.status(200).send("User wurde verifiziert");
+  } else return res.status(409).send("etwas ist schiefgelaufen");
+}
 
 app.delete("/edittrip/:tripID", checkLogin, async (req, res) =>  {
   var id=req.params.tripID;

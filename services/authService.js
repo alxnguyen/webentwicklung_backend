@@ -1,14 +1,16 @@
 const dbHelpers = require("../models/dbHelpers");
 const crypto = require("crypto");
 const redis = require('redis');
-const { env } = require("process");
+const { env, getMaxListeners } = require("process");
 const bcrypt = require("bcrypt");
+const mailingService = require("./mailingService.js");
 
 module.exports = {
     getEmailForSession,
     checkPassword,
     login,
     register,
+    verifyUser
 
 }
 
@@ -40,21 +42,36 @@ client.on("connect", () => console.log("Successfully connected to redis"));
   }
 
 
-  async function register(email, password)  {
+  async function register(email, password, token)  {
     var hashedPassword=await bcrypt.hash(password, 10);
-    var insertedMail=await dbHelpers.createUser(email, hashedPassword);
-    return insertedMail;
+    var token = uuid.v4();
+    var insertedId=await dbHelpers.createUser(email, hashedPassword, token);
+    await mailingService.sendOptInMail(email,id ,token);
+    return insertedId;
   }
 
   async function login(email, password)    {
     correctPassword=await checkPassword(email, password);
-    if(correctPassword) {
+    isActive=await dbHelpers.findUserByEmail(email).active
+    console.log("isActive="+isActive)
+    if(correctPassword&&isActive) {
       const sessionId=crypto.randomUUID();
       await client.set(sessionId, email, { EX: 60*60*1000 });
       return sessionId;
     } else  {
       return undefined;
     }
+  }
+
+  async function verifyUser(id, token)  {
+    user=dbHelpers.findUserById(id);
+    if(user.token=token)  {
+      userUpdated=dbHelpers.activateUser(id);
+      if(userUpdated) {
+        return true;
+      }
+    }
+    return false;
   }
 
   async function getEmailForSession(sessionId)  {

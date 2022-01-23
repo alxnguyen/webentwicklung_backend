@@ -113,9 +113,8 @@ app.patch("/edittrip/:tripID", checkLogin, async (req, res) =>  {
 app.get("/map", checkLogin, async (req, res) => {
   mail=req.userEmail;
   countries=await dbHelpers.readCountries(mail);
-  countryJson=JSON.stringify(countries);
-  console.log("trips"+countries);
-  return res.status(201).end(countryJson);
+  console.log("trips="+countries);
+  return res.status(201).end(countries);
 })
 
 app.delete("/edittrip/:tripID", checkLogin, async (req, res) =>  {

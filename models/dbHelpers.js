@@ -42,7 +42,10 @@ async function readCountries(mail)  {
     newCountryList=[];
     countries=await countries.forEach(element => {
         console.log("element.land="+element.land);
-        newCountryList.push(element.land);
+        console.log(newCountryList.includes(element.land));
+        if(!newCountryList.includes(element.land))  {
+            newCountryList.push(element.land);
+        }
     });
     console.log("newCountryList="+JSON.stringify(countries));
     return newCountryList;

@@ -60,7 +60,8 @@ app.post("/register", async (req, res) =>   {
     } else  {
       return res.status(500).send("we messed up somehow");
     }
-  } catch (UnhandledPromiseRejectionWarning) {
+  } catch (e) {
+    console.log(e);
     return res.status(409).send("User already exists");
   }
 });

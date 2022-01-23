@@ -18,13 +18,10 @@ app.use(cors({
 const checkLogin =async (req, res, next) =>{
   var cookie = req.cookies.session;
   if (!cookie) {
-    console.log("kein cookie da: "+cookie);
     return res.status(409).send("You need to be logged in to see this page." );
   }
   var email = await authService.getEmailForSession(cookie);
-  console.log("email des Dudes: "+email);
   if (!email) {
-    console.log("keine Email bekommen. Cookie: "+cookie+" Mail: "+email);
     return res.status(409).send("You need to be logged in to see this page.");
   }
   req.userEmail = email;
@@ -41,7 +38,6 @@ app.post("/", async (req, res) => {
   if(!sessionId)  {
     return res.status(400).send("User Authentification failed");
   }
-  console.log("cookie wird erstellt mit sessionnummer "+ sessionId);
   res.cookie("session", sessionId, {
     sameSite: "none",
     maxAge: 60 * 60 * 1000,
@@ -73,7 +69,6 @@ app.post("/register", async (req, res) =>   {
 app.get("/edittrip", checkLogin, async (req, res) =>  { 
   trips=await dbHelpers.readTrips(req.userEmail);
   tripJson=JSON.stringify(trips);
-  console.log("trips"+tripJson);
   return res.status(201).end(tripJson);
 });
 
@@ -97,7 +92,7 @@ app.post("/edittrip", checkLogin, async (req, res) => {
   } else return res.status(500).send("irgendetwas ist schiefgelaufen");
 });
 
-app.patch("/edittrip/:tripID", checkLogin, async (req, res) =>  {
+app.put("/edittrip/:tripID", checkLogin, async (req, res) =>  {
 
   var tripname = req.body.tripname;
   var land = req.body.land;
@@ -108,9 +103,9 @@ app.patch("/edittrip/:tripID", checkLogin, async (req, res) =>  {
   var tripBelongs=dbHelpers.tripBelongsToUser(id, mail);
   if(tripBelongs) {
     tripUpdated=dbHelpers.updateTrip(id, tripname, land, start, ende);
-    if(tripUpdated) {
+    if(tripUpdated==1) {
       return res.status(200).send("Trip wurde geupdated");
-    } else return res.status(500).send("irgendetwas ist schiefgelaufen");
+    } else return res.status(400).send("konnte nicht geupdated werden (evtl gar nicht da)");
   } else return res.status(409).send("User hat keinen Zugriff auf diese ID");
 });
 
@@ -127,9 +122,9 @@ app.delete("/edittrip/:tripID", checkLogin, async (req, res) =>  {
   var tripBelongs=dbHelpers.tripBelongsToUser(id, req.userEmail);
   if(tripBelongs) {
     gotDeleted=dbHelpers.deleteTrip(id);
-    if(gotDeleted)  {
+    if(gotDeleted==1)  {
       return res.status(200).send("Trip wurde geloescht");
-    } else return res.status(500).send("irgendetwas ist beim loeschen schief gelaufen");
+    } else return res.status(400).send("konnte nicht geloescht werden (evtl gar nicht da)");
   } else return res.status(409).send("User hat keinen Zugriff auf diese ID");
 });
 

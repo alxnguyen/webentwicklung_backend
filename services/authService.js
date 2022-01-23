@@ -44,7 +44,7 @@ client.on("connect", () => console.log("Successfully connected to redis"));
 
   async function register(email, password)  {
     var hashedPassword=await bcrypt.hash(password, 10);
-    var token = uuid.v4();
+    var token = crypto.randomUUID();
     var insertedId=await dbHelpers.createUser(email, hashedPassword, token);
     await mailingService.sendOptInMail(email,id ,token);
     return insertedId;

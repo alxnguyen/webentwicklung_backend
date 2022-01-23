@@ -39,6 +39,9 @@ async function readTrips(mail) {
 
 async function readCountries(mail)  {
     countries=await db("trips").where({email:mail}).returning("land");
+    countries.forEach(element => {
+        element=element.land;
+    });
     console.log("countries-wert ist"+JSON.stringify(countries));
     return countries;
 }

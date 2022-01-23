@@ -87,6 +87,7 @@ app.post("/edittrip", checkLogin, async (req, res) => {
   console.log("date: "+date);
   console.log("mail: "+mail);
   savedTripname=await dbHelpers.createTrip(mail, tripname, land, start ,ende, date,)
+  console.log("savedTripname="+savedTripname);
   if(savedTripname!=undefined&&savedTripname==tripname) {
     return res.status(201).send("Trip wurde erstellt");
   } else return res.status(500).send("irgendetwas ist schiefgelaufen");

@@ -100,9 +100,9 @@ app.patch("/edittrip/:tripID", checkLogin, async (req, res) =>  {
   var ende = req.body.end;
   var mail = req.userEmail;
   var id=req.params.tripID;
-  var tripBelongs=dbHelpers.tripBelongsToUser(id, mail);
+  var tripBelongs=await dbHelpers.tripBelongsToUser(id, mail);
   if(tripBelongs) {
-    tripUpdated=dbHelpers.updateTrip(id, tripname, land, start, ende);
+    tripUpdated=await dbHelpers.updateTrip(id, tripname, land, start, ende);
     if(tripUpdated) {
       return res.status(200).send("Trip wurde geupdated");
     } else return res.status(400).send("konnte nicht geupdated werden (evtl gar nicht da)");
@@ -119,9 +119,9 @@ app.get("/map", checkLogin, async (req, res) => {
 
 app.delete("/edittrip/:tripID", checkLogin, async (req, res) =>  {
   var id=req.params.tripID;
-  var tripBelongs=dbHelpers.tripBelongsToUser(id, req.userEmail);
+  var tripBelongs=await dbHelpers.tripBelongsToUser(id, req.userEmail);
   if(tripBelongs) {
-    gotDeleted=dbHelpers.deleteTrip(id);
+    gotDeleted=await dbHelpers.deleteTrip(id);
     if(gotDeleted==1)  {
       return res.status(200).send("Trip wurde geloescht");
     } else return res.status(400).send("konnte nicht geloescht werden (evtl gar nicht da)");

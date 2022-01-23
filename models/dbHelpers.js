@@ -47,7 +47,7 @@ async function readCountries(mail)  {
             newCountryList.push(element.land);
         }
     });
-    console.log("newCountryList="+JSON.stringify(countries));
+    console.log("newCountryList="+countries.toString());
     return newCountryList;
 }
 async function updateTrip(tripID, tripname, land, start, ende)  {

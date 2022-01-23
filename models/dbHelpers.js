@@ -38,7 +38,7 @@ async function readTrips(mail) {
 }
 
 async function readCountries(mail)  {
-    countries=await db("trips").where({email:mail}).distinctOn("land");
+    countries=await db("trips").where({email:mail}).distinctOn("land").returning("land");
     console.log("countries-wert ist"+JSON.stringify(countries));
     return countries;
 }

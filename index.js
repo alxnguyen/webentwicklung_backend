@@ -52,7 +52,7 @@ app.post("/register", async (req, res) =>   {
   var email=req.body.email;
   var password=req.body.password;
   try {
-    var createdMail=await authService.register(email, password, token);
+    var createdMail=await authService.register(email, password);
     console.log("createdMail="+createdMail);
     if (createdMail==email)  {
       console.log("User wurde erstellt");

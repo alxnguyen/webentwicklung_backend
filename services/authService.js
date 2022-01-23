@@ -42,7 +42,7 @@ client.on("connect", () => console.log("Successfully connected to redis"));
   }
 
 
-  async function register(email, password, token)  {
+  async function register(email, password)  {
     var hashedPassword=await bcrypt.hash(password, 10);
     var token = uuid.v4();
     var insertedId=await dbHelpers.createUser(email, hashedPassword, token);

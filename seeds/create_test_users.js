@@ -12,9 +12,9 @@ exports.seed = function(knex) {
       const password3 = await bcrypt.hash("password3", saltRounds);
 
       return knex('users').insert([
-        {id: 1, email: 'user1@email.com', password: password1},
-        {id: 2, email: 'user2@email.com', password: password2},
-        {id: 3, email: 'user3@email.com', password: password3}
+        {email: 'user1@email.com', password: password1},
+        {email: 'user2@email.com', password: password2},
+        {email: 'user3@email.com', password: password3}
       ]);
     });
 };

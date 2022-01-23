@@ -1,4 +1,8 @@
 module.exports = {
+  development: {
+    client: "pg", 
+    connection: {filename: "./migrations" }
+  },
   production: {
     client: 'pg',
     connection: process.env.DATABASE_URL,

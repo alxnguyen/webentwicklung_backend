@@ -1,12 +1,15 @@
-const Users = require("../models/dbHelpers");
+const dbHelpers = require("../models/dbHelpers");
 const crypto = require("crypto");
 const redis = require('redis');
 const { env } = require("process");
 const bcrypt = require("bcrypt");
 
 module.exports = {
+    getEmailForSession,
     checkPassword,
-    login
+    login,
+    register,
+
 }
 
 const client = redis.createClient({
@@ -15,13 +18,15 @@ const client = redis.createClient({
 client.on("error", (err) => console.log("Redis Client Error", err));
 client.on("connect", () => console.log("Successfully connected to redis"));
 
+
+
 (async () => {
     await client.connect();
   })();
 
 
   async function checkPassword(email, password)   {
-    const user= await Users.findUserByEmail(email);
+    const user= await dbHelpers.findUserByEmail(email);
     if(!user)   {
         return false;
     } else  {
@@ -35,13 +40,27 @@ client.on("connect", () => console.log("Successfully connected to redis"));
   }
 
 
+  async function register(email, password)  {
+    var hashedPassword=await bcrypt.hash(password, 10);
+    var insertedMail=await dbHelpers.createUser(email, hashedPassword);
+    return insertedMail;
+  }
+
   async function login(email, password)    {
     correctPassword=await checkPassword(email, password);
     if(correctPassword) {
       const sessionId=crypto.randomUUID();
-      await client.set(sessionId, email, { EX: 60 });
+      await client.set(sessionId, email, { EX: 60*60*1000 });
       return sessionId;
     } else  {
       return undefined;
     }
   }
+
+  async function getEmailForSession(sessionId)  {
+    email=await client.get(sessionId);
+    return email;
+  }
+
+
+

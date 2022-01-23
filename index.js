@@ -111,7 +111,7 @@ app.patch("/edittrip/:tripID", checkLogin, async (req, res) =>  {
 
 app.get("/map", checkLogin, async (req, res) => {
   mail=req.userEmail;
-  countries=dbHelpers.readCountries(mail);
+  countries=await dbHelpers.readCountries(mail);
   countryJson=JSON.stringify(countries);
   console.log("trips"+countryJson);
   return res.status(201).end(countryJson);

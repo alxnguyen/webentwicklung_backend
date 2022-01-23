@@ -114,7 +114,7 @@ app.get("/map", checkLogin, async (req, res) => {
   mail=req.userEmail;
   countries=await dbHelpers.readCountries(mail);
   countryJson=JSON.stringify(countries);
-  console.log("trips"+countryJson);
+  console.log("trips"+countries);
   return res.status(201).end(countryJson);
 })
 

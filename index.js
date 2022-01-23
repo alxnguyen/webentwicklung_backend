@@ -103,7 +103,7 @@ app.put("/edittrip/:tripID", checkLogin, async (req, res) =>  {
   var tripBelongs=dbHelpers.tripBelongsToUser(id, mail);
   if(tripBelongs) {
     tripUpdated=dbHelpers.updateTrip(id, tripname, land, start, ende);
-    if(tripUpdated==1) {
+    if(tripUpdated) {
       return res.status(200).send("Trip wurde geupdated");
     } else return res.status(400).send("konnte nicht geupdated werden (evtl gar nicht da)");
   } else return res.status(409).send("User hat keinen Zugriff auf diese ID");

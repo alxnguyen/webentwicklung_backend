@@ -27,7 +27,7 @@ async function findUserByEmail(email) {
 async function tripBelongsToUser(tripId, userMail)  {
 
     tripBelongs=await db("trips").where({email:userMail, id:tripId});
-    console.log("tripBelongs-Wert ist: "+tripBelongs);
+    console.log("tripBelongs-Wert ist: "+JSON.stringify(tripBelongs));
     //hier true zurueckgeben wenn tripBelongs nicht leer, und falls wenn tripBelongs den Wert hat den tripBelongs hat wenn alles leer ist
     return tripBelongs;
 }

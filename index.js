@@ -49,7 +49,6 @@ app.post("/", async (req, res) => {
   
 });
 app.post("/register", async (req, res) =>   {
-  console.log("request ist angekommen");
   var email=req.body.email;
   var password=req.body.password;
   try {
@@ -58,7 +57,6 @@ app.post("/register", async (req, res) =>   {
       console.log("User wurde erstellt");
       return res.status(201).send("User created");
     } else  {
-      console.log("irgendwas ist schiefgelaufen "+ createdMail);
       return res.status(500).send("we messed up somehow");
     }
   } catch (UnhandledPromiseRejectionWarning) {
@@ -79,15 +77,7 @@ app.post("/edittrip", checkLogin, async (req, res) => {
   var ende = req.body.end;
   var date = req.body.date;
   var mail = req.userEmail;
-
-  console.log("tripname: "+tripname);
-  console.log("land: "+land);
-  console.log("start: "+start);
-  console.log("ende: "+ende);
-  console.log("date: "+date);
-  console.log("mail: "+mail);
   savedTripname=await dbHelpers.createTrip(mail, tripname, land, start ,ende, date,)
-  console.log("savedTripname="+savedTripname);
   if(savedTripname!=undefined&&savedTripname==tripname) {
     return res.status(201).send("Trip wurde erstellt");
   } else return res.status(500).send("irgendetwas ist schiefgelaufen");
@@ -113,7 +103,6 @@ app.patch("/edittrip/:tripID", checkLogin, async (req, res) =>  {
 app.get("/map", checkLogin, async (req, res) => {
   mail=req.userEmail;
   countries=await dbHelpers.readCountries(mail);
-  console.log("trips="+countries);
   return res.status(201).end(JSON.stringify(countries));
 })
 

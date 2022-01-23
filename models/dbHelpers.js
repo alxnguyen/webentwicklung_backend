@@ -27,8 +27,6 @@ async function findUserByEmail(email) {
 async function tripBelongsToUser(tripId, userMail)  {
 
     tripBelongs=await db("trips").where({email:userMail, id:tripId});
-    console.log("tripBelongs-Wert ist: "+JSON.stringify(tripBelongs));
-    //hier true zurueckgeben wenn tripBelongs nicht leer, und falls wenn tripBelongs den Wert hat den tripBelongs hat wenn alles leer ist
     return tripBelongs;
 }
 
@@ -41,8 +39,6 @@ async function readCountries(mail)  {
     countries=await db("trips").where({email:mail}).returning("land");
     newCountryList=[];
     countries=await countries.forEach(element => {
-        console.log("element.land="+element.land);
-        console.log(newCountryList.includes(element.land));
         if(!newCountryList.includes(element.land))  {
             newCountryList.push(element.land);
         }
@@ -51,12 +47,10 @@ async function readCountries(mail)  {
 }
 async function updateTrip(tripID, tripname, land, start, ende)  {
     tripUpdated=await db("trips").where({id:tripID}).update({tripname:tripname, land:land, start:start, end:ende});
-    //true zurueckgeben wenn tripUpdated nicht leer, und falls etc. etc. etc.
     return tripUpdated;
 }
 async function deleteTrip(tripId)   {
     success=await db("trips").where({id:tripId}).delete();
-    console.log("knex delete hat folgendes returned: "+success);
     return success;
 }
 

@@ -114,7 +114,7 @@ app.get("/map", checkLogin, async (req, res) => {
   mail=req.userEmail;
   countries=await dbHelpers.readCountries(mail);
   console.log("trips="+countries);
-  return res.status(201).end(countries.toString());
+  return res.status(201).end(JSON.stringify(countries));
 })
 
 app.delete("/edittrip/:tripID", checkLogin, async (req, res) =>  {

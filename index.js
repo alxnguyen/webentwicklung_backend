@@ -92,7 +92,7 @@ app.post("/edittrip", checkLogin, async (req, res) => {
   } else return res.status(500).send("irgendetwas ist schiefgelaufen");
 });
 
-app.put("/edittrip/:tripID", checkLogin, async (req, res) =>  {
+app.patch("/edittrip/:tripID", checkLogin, async (req, res) =>  {
 
   var tripname = req.body.tripname;
   var land = req.body.land;

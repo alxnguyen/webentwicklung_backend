@@ -39,12 +39,13 @@ async function readTrips(mail) {
 
 async function readCountries(mail)  {
     countries=await db("trips").where({email:mail}).returning("land");
+    newCountryList=[];
     countries=await countries.forEach(element => {
         console.log("element.land="+element.land);
-        element=element.land;
+        newCountryList.push(element.land);
     });
-    console.log("countries-wert ist"+JSON.stringify(countries));
-    return countries;
+    console.log("newCountryList="+JSON.stringify(countries));
+    return newCountryList;
 }
 async function updateTrip(tripID, tripname, land, start, ende)  {
     tripUpdated=await db("trips").where({id:tripID}).update({tripname:tripname, land:land, start:start, end:ende});

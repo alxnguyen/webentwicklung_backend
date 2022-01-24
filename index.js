@@ -109,6 +109,7 @@ app.get("/map", checkLogin, async (req, res) => {
 })
 
 app.get("/verify/:userID/:token"), (req, res) => {
+  console.log("an attempt was made");
   var userID=req.params.userID;
   var token=req.params.token;
 

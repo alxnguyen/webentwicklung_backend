@@ -66,8 +66,11 @@ client.on("connect", () => console.log("Successfully connected to redis"));
 
   async function verifyUser(id, token)  {
     user=dbHelpers.findUserById(id);
+    console.log("user="+user);
     if(user.token==token)  {
+      console.log("token sind gleich, dbhelper aktiviert user");
       userUpdated=await dbHelpers.activateUser(id);
+      console.log("userUpdated="+userUpdated);
       if(userUpdated) {
         return true;
       }

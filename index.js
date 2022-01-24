@@ -108,17 +108,16 @@ app.get("/map", checkLogin, async (req, res) => {
   return res.status(201).end(JSON.stringify(countries));
 })
 
-app.get("/verify"), async (req, res) => {
-//  console.log("an attempt was made");
-//  var userID=req.params.userID;
-//  var token=req.params.token;
-//
-//  userVerified=authService.verifyUser(userID, token);
-//  if(userVerified)  {
-//    return res.status(200).send("User wurde verifiziert");
-//  } else return res.status(409).send("etwas ist schiefgelaufen");
-  return res.status(409).send("was ist hier los");
-}
+app.get("/verify", async (req, res) => {
+  console.log("an attempt was made");
+  var userID=req.params.userID;
+  var token=req.params.token;
+
+  userVerified=authService.verifyUser(userID, token);
+  if(userVerified)  {
+    return res.status(200).send("User wurde verifiziert");
+  } else return res.status(409).send("etwas ist schiefgelaufen");
+});
 
 app.delete("/edittrip/:tripID", checkLogin, async (req, res) =>  {
   var id=req.params.tripID;

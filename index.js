@@ -114,6 +114,7 @@ app.get("/verify/:userID/:token", async (req, res) => {
   var token=req.params.token;
 
   userVerified=authService.verifyUser(userID, token);
+  console.log("userVerified="+userVerified);
   if(userVerified)  {
     return res.status(200).send("User wurde verifiziert");
   } else return res.status(409).send("etwas ist schiefgelaufen");

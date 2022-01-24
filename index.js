@@ -108,7 +108,7 @@ app.get("/map", checkLogin, async (req, res) => {
   return res.status(201).end(JSON.stringify(countries));
 })
 
-app.get("/verify", async (req, res) => {
+app.get("/verify/:userID/:token", async (req, res) => {
   console.log("an attempt was made");
   var userID=req.params.userID;
   var token=req.params.token;

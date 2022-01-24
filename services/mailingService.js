@@ -15,8 +15,8 @@ module.exports = {
       let mail = {
         from: process.env.MAIL_USER,
         to: email,
-        subject: "Please active your account",
-        text: `To activate your account, please click this link: ${activationLink}`,
+        subject: "Bitte aktivieren sie ihren Account",
+        text: `Sie können ihren Account mit folgendem Link aktivieren: ${activationLink}`,
       };
       await transporter.sendMail(mail);
     },

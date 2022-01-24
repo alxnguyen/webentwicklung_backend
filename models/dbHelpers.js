@@ -27,12 +27,14 @@ async function createUser(newEmail, hashedPassword, token)  {
 
 async function activateUser(id) {
     userUpdated=await db("users").where({id:id}).update({active:true});
+    console.log("userUpdated="+userUpdated);
+    console.log("userUpdatedJSON="+JSON.stringify(userUpdated));
     return userUpdated;
 }
 
 async function findUserById(id) {
     user=await db("users").where({id:id}).first();
-    return userUpdated;
+    return user;
 }
 async function findUserByEmail(email) {
     user=await db("users").where({email:email}).first();

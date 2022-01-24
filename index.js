@@ -113,7 +113,7 @@ app.get("/verify/:userID/:token", async (req, res) => {
   var userID=req.params.userID;
   var token=req.params.token;
 
-  userVerified=authService.verifyUser(userID, token);
+  userVerified=await authService.verifyUser(userID, token);
   console.log("userVerified="+userVerified);
   if(userVerified)  {
     return res.status(200).send("User wurde verifiziert");

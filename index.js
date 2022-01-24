@@ -53,7 +53,6 @@ app.post("/register", async (req, res) =>   {
   var password=req.body.password;
   try {
     var insertedId=await authService.register(email, password);
-    console.log("insertedId="+insertedId);
     if (insertedId!=undefined)  {
       console.log("User wurde erstellt");
       return res.status(201).send("User created");
@@ -61,7 +60,6 @@ app.post("/register", async (req, res) =>   {
       return res.status(500).send("we messed up somehow");
     }
   } catch (e) {
-    console.log(e);
     return res.status(409).send("User already exists");
   }
 });
@@ -113,7 +111,6 @@ app.get("/verify/:userID/:token", async (req, res) => {
   var token=req.params.token;
 
   userVerified=await authService.verifyUser(userID, token);
-  console.log("userVerified="+userVerified);
   if(userVerified)  {
     return res.status(200).send("User wurde verifiziert");
   } else return res.status(409).send("etwas ist schiefgelaufen");

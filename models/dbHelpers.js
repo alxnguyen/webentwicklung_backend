@@ -27,8 +27,6 @@ async function createUser(newEmail, hashedPassword, token)  {
 
 async function activateUser(id) {
     userUpdated=await db("users").where({id:id}).update({active:true});
-    console.log("userUpdated="+userUpdated);
-    console.log("userUpdatedJSON="+JSON.stringify(userUpdated));
     return userUpdated;
 }
 

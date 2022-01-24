@@ -11,7 +11,7 @@ let transporter=nodemailer.createTransport({
 
 module.exports = {
     async sendOptInMail(email, userID, token) {
-      let activationLink = `${process.env.BASE_URL}/verify/${userID}/${token}`;
+      let activationLink = `${process.env.BASE_URL}verify/${userID}/${token}`;
       let mail = {
         from: process.env.MAIL_USER,
         to: email,

@@ -53,7 +53,6 @@ client.on("connect", () => console.log("Successfully connected to redis"));
   async function login(email, password)    {
     correctPassword=await checkPassword(email, password);
     user=await dbHelpers.findUserByEmail(email);
-    console.log("user="+user);
     if(user!=undefined) {
       if(correctPassword&&user.active==true) {
         const sessionId=crypto.randomUUID();
